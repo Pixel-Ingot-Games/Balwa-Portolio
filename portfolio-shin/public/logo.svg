@@ -1,0 +1,11 @@
+<svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Game Controller Icon -->
+  <rect x="8" y="12" width="24" height="16" rx="8" fill="currentColor"/>
+  <circle cx="14" cy="18" r="2" fill="white"/>
+  <circle cx="26" cy="18" r="2" fill="white"/>
+  <rect x="18" y="16" width="4" height="1" fill="white"/>
+  <rect x="19" y="15" width="2" height="3" fill="white"/>
+  
+  <!-- Text -->
+  <text x="40" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="currentColor">BALWA</text>
+</svg>
