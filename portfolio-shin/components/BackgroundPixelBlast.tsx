@@ -3,11 +3,11 @@ import PixelBlast from './PixelBlast';
 
 export default function BackgroundPixelBlast() {
   return (
-    <div className="fixed inset-0 w-full h-full pointer-events-auto" style={{ zIndex: 1 }}>
+    <div className="fixed inset-0 w-full h-full pointer-events-auto bg-gray-900" style={{ zIndex: 1 }}>
       <PixelBlast
         variant="circle"
         pixelSize={6}
-        color="#B19EEF"
+        color="#333333"
         patternScale={3}
         patternDensity={1.2}
         pixelSizeJitter={0.5}
@@ -21,7 +21,7 @@ export default function BackgroundPixelBlast() {
         liquidWobbleSpeed={5}
         speed={0.6}
         edgeFade={0.25}
-        transparent={true}
+        transparent={false}
       />
     </div>
   );
