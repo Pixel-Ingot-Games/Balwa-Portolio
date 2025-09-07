@@ -352,7 +352,6 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
   noiseAmount = 0
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const visibilityRef = useRef({ visible: true });
   const speedRef = useRef(speed);
 
   const threeRef = useRef<{
@@ -554,10 +553,7 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
       });
       let raf = 0;
       const animate = () => {
-        if (autoPauseOffscreen && !visibilityRef.current.visible) {
-          raf = requestAnimationFrame(animate);
-          return;
-        }
+        // Animation loop continues without pause
         uniforms.uTime.value = timeOffset + clock.getElapsedTime() * speedRef.current;
         if (liquidEffect) (liquidEffect as any).uniforms.get('uTime').value = uniforms.uTime.value;
         if (composer) {
