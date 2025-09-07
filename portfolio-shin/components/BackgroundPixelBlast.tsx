@@ -7,7 +7,7 @@ export default function BackgroundPixelBlast() {
       <PixelBlast
         variant="circle"
         pixelSize={6}
-        color="#333333"
+        color="#1a1a1a"
         patternScale={3}
         patternDensity={1.2}
         pixelSizeJitter={0.5}
