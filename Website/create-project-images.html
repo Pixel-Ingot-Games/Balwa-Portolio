@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project Image Generator</title>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="300" style="border: 1px solid #ccc;"></canvas>
+    <br>
+    <button onclick="generateImage('stellaverse')">Generate Stellaverse</button>
+    <button onclick="generateImage('galixity')">Generate Galixity</button>
+    <button onclick="generateImage('vr-arena')">Generate VR Arena</button>
+    <br>
+    <a id="download" style="display: none;">Download</a>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        function generateImage(projectId) {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#0bd7b0');
+            gradient.addColorStop(1, '#ffd200');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Add grid pattern
+            ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+            ctx.lineWidth = 1;
+            for (let x = 0; x < canvas.width; x += 20) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+            for (let y = 0; y < canvas.height; y += 20) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+            
+            // Project title
+            ctx.fillStyle = '#000';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            const titles = {
+                'stellaverse': 'STELLAVERSE',
+                'galixity': 'GALIXITY',
+                'vr-arena': 'VR ARENA'
+            };
+            
+            ctx.fillText(titles[projectId], canvas.width / 2, canvas.height / 2);
+            
+            // Subtitle
+            ctx.font = '14px Arial';
+            ctx.fillText('Click to view details', canvas.width / 2, canvas.height / 2 + 30);
+            
+            // Download link
+            const link = document.getElementById('download');
+            link.href = canvas.toDataURL();
+            link.download = `${projectId}-thumb.png`;
+            link.style.display = 'block';
+            link.textContent = `Download ${projectId}-thumb.png`;
+        }
+    </script>
+</body>
+</html>

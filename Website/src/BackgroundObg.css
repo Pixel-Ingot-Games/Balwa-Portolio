@@ -1,0 +1,12 @@
+.obg-root {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+}
+.obg-item {
+  position: absolute;
+  transform-origin: center;
+  filter: drop-shadow(0 8px 0 rgba(0,0,0,.18));
+}
+
