@@ -728,21 +728,24 @@ footer { padding: 32px 0 40px; text-align: center; font-weight: 600; }
     height: 200px;
   }
   
-  /* Skills - one by one layout */
+  /* Skills - normal images layout */
   .skills-images {
+    display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
     position: relative;
     min-height: auto;
   }
   
   .skills-img {
-    height: 300px;
+    height: 250px;
     width: auto;
     position: relative;
     transform: none;
     z-index: 1;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   }
   
   .skills-img:nth-child(1) {
@@ -758,7 +761,7 @@ footer { padding: 32px 0 40px; text-align: center; font-weight: 600; }
   }
   
   .skills-img:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     z-index: 2;
   }
   
@@ -813,21 +816,29 @@ footer { padding: 32px 0 40px; text-align: center; font-weight: 600; }
   }
   
   .projects-images {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 20px;
     position: relative;
     min-height: auto;
+    width: 100%;
   }
   
   .project-img {
     position: relative;
     height: 300px;
     transform: none;
+    width: 100%;
+    max-width: 400px;
   }
   
   .project-bundle {
     margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
 }
 
