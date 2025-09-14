@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getProjectImages, getProjectThumbnail } from './data/projects';
 
 interface Project {
   id: string;
@@ -7,7 +8,7 @@ interface Project {
   longDescription: string;
   technologies: string[];
   features: string[];
-  images: string[];
+  images?: string[];
   status: string;
   platforms: string[];
   year: string;
@@ -20,6 +21,25 @@ interface ProjectModalProps {
 }
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose }) => {
+  const [projectImages, setProjectImages] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (project && isOpen) {
+      setLoading(true);
+      getProjectImages(project.id)
+        .then(images => {
+          setProjectImages(images);
+          setLoading(false);
+        })
+        .catch(error => {
+          console.error('Error loading project images:', error);
+          setProjectImages([]);
+          setLoading(false);
+        });
+    }
+  }, [project, isOpen]);
+
   if (!project) return null;
 
   const handleBackdropClick = (e: React.MouseEvent) => {
@@ -42,67 +62,65 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
       tabIndex={-1}
     >
       <div className="modal-content">
-        <div className="modal-header">
-          <h2 className="modal-title">{project.title}</h2>
-          <button className="modal-close" onClick={onClose} aria-label="Close modal">
-            ×
-          </button>
-        </div>
+        <button className="modal-close" onClick={onClose} aria-label="Close modal">
+          ×
+        </button>
         
-        <div className="modal-body">
-          <div className="modal-section">
-            <h3>Description</h3>
-            <p className="modal-description">{project.longDescription}</p>
-          </div>
-
-          <div className="modal-section">
-            <h3>Technologies</h3>
-            <div className="modal-tech-stack">
-              {project.technologies.map((tech, index) => (
-                <span key={index} className="modal-tech-tag">{tech}</span>
-              ))}
+        <div className="modal-book-layout">
+          {/* Left side - Project thumbnail and gallery */}
+          <div className="modal-left">
+            <div className="modal-thumbnail">
+              <img 
+                src={getProjectThumbnail(project.id)} 
+                alt={project.title}
+                className="modal-main-image"
+              />
             </div>
-          </div>
-
-          <div className="modal-section">
-            <h3>Key Features</h3>
-            <ul className="modal-features">
-              {project.features.map((feature, index) => (
-                <li key={index}>{feature}</li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="modal-section">
-            <h3>Project Details</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
-              <div>
-                <strong style={{ color: '#0bd7b0' }}>Status:</strong> {project.status}
+            {loading ? (
+              <div className="modal-gallery-left">
+                <h3>Gallery</h3>
+                <div className="modal-images-left">
+                  <p>Loading images...</p>
+                </div>
               </div>
-              <div>
-                <strong style={{ color: '#0bd7b0' }}>Year:</strong> {project.year}
+            ) : projectImages.length > 0 ? (
+              <div className="modal-gallery-left">
+                <h3>Gallery</h3>
+                <div className="modal-images-left">
+                  {projectImages.map((image, index) => (
+                    <img 
+                      key={index} 
+                      src={image} 
+                      alt={`${project.title} screenshot ${index + 1}`}
+                      className="modal-image-left"
+                    />
+                  ))}
+                </div>
               </div>
-            </div>
-            <div>
-              <strong style={{ color: '#0bd7b0' }}>Platforms:</strong> {project.platforms.join(', ')}
-            </div>
+            ) : null}
           </div>
 
-          {project.images.length > 0 && (
-            <div className="modal-section">
-              <h3>Gallery</h3>
-              <div className="modal-images">
-                {project.images.map((image, index) => (
-                  <img 
-                    key={index} 
-                    src={image} 
-                    alt={`${project.title} screenshot ${index + 1}`}
-                    className="modal-image"
-                  />
-                ))}
+          {/* Right side - Project details */}
+          <div className="modal-right">
+            <div className="modal-header">
+              <h2 className="modal-title">{project.title}</h2>
+            </div>
+            
+            <div className="modal-body">
+              <div className="modal-section">
+                <h3>Description</h3>
+                <ul className="modal-description-list">
+                  {project.longDescription.split('. ').map((point, index) => (
+                    point.trim() && (
+                      <li key={index} className="modal-description-item">
+                        {point.trim().endsWith('.') ? point.trim() : point.trim() + '.'}
+                      </li>
+                    )
+                  ))}
+                </ul>
               </div>
             </div>
-          )}
+          </div>
         </div>
       </div>
     </div>

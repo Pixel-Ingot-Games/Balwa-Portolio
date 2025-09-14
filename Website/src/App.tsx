@@ -3,14 +3,14 @@ import FloatingImages from './FloatingImages'
 import DotGrid from './DotGrid'
 import ProjectModal from './ProjectModal'
 import { useState } from 'react'
-import { projects, getFeaturedProjects } from './data/projects'
+import { projects } from './data/projects'
 
 export default function App() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Get featured projects (first 3) for the thrown cards display
-  const featuredProjects = getFeaturedProjects(3);
+  // Use all projects for display
+  const allProjects = projects;
 
   const handleProjectClick = (project: any) => {
     setSelectedProject(project);
@@ -52,7 +52,7 @@ export default function App() {
       <header className="hero">
         <div className="container">
           <GlitchText className="hero-title" speed={0.4} enableShadows enableOnHover={false}>
-            SAMAD
+            SAMAD QAMAR
           </GlitchText>
           <GlitchText className="hero-tagline" speed={0.35} enableShadows enableOnHover={true}>
             Code, craft, conquer: Building worlds one pixel at a time.
@@ -88,6 +88,7 @@ export default function App() {
           <div className="skills-images" aria-label="Skills">
             <img className="skills-img" src="/images/skill0.png" alt="Skills 0" tabIndex={0} />
             <img className="skills-img" src="/images/skills1.png" alt="Skills 1" tabIndex={0} />
+            <img className="skills-img" src="/images/skills3.png" alt="Skills 3" tabIndex={0} />
           </div>
         </section>
 
@@ -206,30 +207,39 @@ export default function App() {
 
         <section id="projects" className="section container projects-section">
           <h2 className="section-title">Featured Projects</h2>
-          <div className="projects-images" aria-label="Projects">
-            {featuredProjects.map((project, index) => (
-              <img 
-                key={project.id}
-                className="project-img" 
-                src={`/images/projects/${project.id}-thumb.png`} 
-                alt={project.title}
-                tabIndex={0}
-                onClick={() => handleProjectClick(project)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    handleProjectClick(project);
-                  }
-                }}
-              />
-            ))}
-          </div>
+          {allProjects.reduce((bundles, project, index) => {
+            const bundleIndex = Math.floor(index / 3);
+            if (!bundles[bundleIndex]) bundles[bundleIndex] = [];
+            bundles[bundleIndex].push(project);
+            return bundles;
+          }, [] as typeof allProjects[]).map((bundle, bundleIndex) => (
+            <div key={bundleIndex} className="project-bundle">
+              <div className="projects-images" aria-label={`Project Bundle ${bundleIndex + 1}`}>
+                {bundle.map((project, index) => (
+                  <img 
+                    key={project.id}
+                    className="project-img" 
+                    src={`/images/projects/${project.id}-thumb.png`} 
+                    alt={project.title}
+                    tabIndex={0}
+                    onClick={() => handleProjectClick(project)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleProjectClick(project);
+                      }
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
         </section>
       </main>
 
       <footer>
         <div className="container">
-          © {new Date().getFullYear()} Samad Qamar • Shah Alam, Selangor, Malaysia
+          © {new Date().getFullYear()} Samad Qamar • +60-143923670
         </div>
       </footer>
 
