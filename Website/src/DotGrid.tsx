@@ -4,6 +4,9 @@ import './DotGrid.css'
 
 // No extra plugins; use gsap.to with physics-like easing
 
+// Type guard for window
+const isWindowAvailable = (): boolean => typeof window !== 'undefined'
+
 const throttle = (func: (...args: any[]) => void, limit: number) => {
   let lastCall = 0
   return function (this: any, ...args: any[]) {
@@ -93,7 +96,7 @@ const DotGrid: React.FC<DotGridProps> = ({
     const canvas = canvasRef.current
     if (!wrap || !canvas) return
     const { width, height } = wrap.getBoundingClientRect()
-    const dpr = window.devicePixelRatio || 1
+    const dpr = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1
     canvas.width = width * dpr
     canvas.height = height * dpr
     canvas.style.width = `${width}px`
@@ -163,15 +166,24 @@ const DotGrid: React.FC<DotGridProps> = ({
   useEffect(() => {
     buildGrid()
     let ro: ResizeObserver | null = null
-    if ('ResizeObserver' in window) {
-      ro = new ResizeObserver(buildGrid)
-      wrapperRef.current && ro.observe(wrapperRef.current)
-    } else {
-      window.addEventListener('resize', buildGrid)
+    
+    if (typeof window !== 'undefined') {
+      if ('ResizeObserver' in window) {
+        ro = new ResizeObserver(buildGrid)
+        wrapperRef.current && ro.observe(wrapperRef.current)
+      } else {
+        // @ts-ignore - window is available in this context
+        window.addEventListener('resize', buildGrid)
+      }
     }
+    
     return () => {
-      if (ro) ro.disconnect()
-      else window.removeEventListener('resize', buildGrid)
+      if (ro) {
+        ro.disconnect()
+      } else if (typeof window !== 'undefined') {
+        // @ts-ignore - window is available in this context
+        window.removeEventListener('resize', buildGrid)
+      }
     }
   }, [buildGrid])
 
@@ -234,11 +246,19 @@ const DotGrid: React.FC<DotGridProps> = ({
       }
     }
     const throttledMove = throttle(onMove, 50)
-    window.addEventListener('mousemove', throttledMove, { passive: true })
-    window.addEventListener('click', onClick)
+    if (typeof window !== 'undefined') {
+      // @ts-ignore - window is available in this context
+      window.addEventListener('mousemove', throttledMove, { passive: true })
+      // @ts-ignore - window is available in this context
+      window.addEventListener('click', onClick)
+    }
     return () => {
-      window.removeEventListener('mousemove', throttledMove)
-      window.removeEventListener('click', onClick)
+      if (typeof window !== 'undefined') {
+        // @ts-ignore - window is available in this context
+        window.removeEventListener('mousemove', throttledMove)
+        // @ts-ignore - window is available in this context
+        window.removeEventListener('click', onClick)
+      }
     }
   }, [maxSpeed, speedTrigger, proximity, resistance, returnDuration, shockRadius, shockStrength])
 
