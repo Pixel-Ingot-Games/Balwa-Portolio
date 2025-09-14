@@ -43,7 +43,7 @@ export default function App() {
               <a href="#roles">EXPERIENCE</a>
             </nav>
             <div className="nav-cta">
-              <a className="btn accent" href="mailto:samadqamar755@gmail.com">CONNECT WITH ME</a>
+              <a className="btn accent" href="/Resume.pdf" download="Samad_Qamar_Resume.pdf">VIEW RESUME</a>
             </div>
           </div>
         </div>
