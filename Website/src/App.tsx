@@ -62,9 +62,13 @@ export default function App() {
             3D Modelling, and Machine Learning. Published on Desktop, Mobile, and Web.
           </p>
           <div className="cta-row">
-            <a className="btn" href="mailto:samadqamar755@gmail.com">Get in touch</a>
+            <a className="btn" href="https://wa.me/60143923670">Whatsapp</a>
             <a className="btn secondary" href="https://www.linkedin.com/in/samad-qamar" target="_blank" rel="noreferrer">LinkedIn</a>
             <a className="btn secondary" href="https://github.com/samadqamar" target="_blank" rel="noreferrer">GitHub</a>
+            <a className="btn secondary" href="https://www.instagram.com/_unbound_x" target="_blank" rel="noreferrer">Instagram</a>
+            <a className="btn secondary" href="https://x.com/_unboundX" target="_blank" rel="noreferrer">X/ Twitter</a>
+            <a className="btn" href="mailto:samadqamar755@gmail.com">Email</a>
+
           </div>
         </div>
       </header>
@@ -79,6 +83,7 @@ export default function App() {
              teams and managed projects from concept to launch, creating immersive and engaging experiences. Passionate about combining creativity and technology,
               I strive to deliver innovative games that players love.
             </p>
+            
           </div>
           <img className="about-img" src="/images/mug.png" alt="Mug" />
         </section>
@@ -237,9 +242,16 @@ export default function App() {
         </section>
       </main>
 
-      <footer>
-        <div className="container">
-          © {new Date().getFullYear()} Samad Qamar • +60-143923670
+      <footer className="site-footer">
+        <div className="container footer-inner">
+          <div className="footer-left">© {new Date().getFullYear()} Samad Qamar</div>
+          <div className="footer-links">
+            <a className="social-btn instagram" href="https://www.instagram.com/_unbound_x" target="_blank" rel="noreferrer">Instagram</a>
+            <a className="social-btn twitter" href="https://x.com/_unboundX" target="_blank" rel="noreferrer">Twitter</a>
+            <a className="social-btn github" href="https://github.com/samadqamar" target="_blank" rel="noreferrer">GitHub</a>
+            <a className="social-btn linkedin" href="https://www.linkedin.com/in/samad-qamar" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a className="social-btn whatsapp" href="https://wa.me/60143923670" target="_blank" rel="noreferrer">WhatsApp</a>
+          </div>
         </div>
       </footer>
 
