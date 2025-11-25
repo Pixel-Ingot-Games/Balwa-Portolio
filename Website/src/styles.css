@@ -694,6 +694,208 @@ footer { padding: 32px 0 40px; text-align: center; font-weight: 600; }
 .site-footer .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 0; }
 .site-footer .footer-left { font-weight: 700; }
 
+/* VR Projects Page Styles */
+.vr-projects-section {
+  padding: 72px 0 60px;
+}
+
+.vr-intro {
+  max-width: 800px;
+  margin: 0 auto 60px;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.vr-project-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 40px;
+  margin-bottom: 50px;
+  box-shadow: 0 16px 24px rgba(0,0,0,.25), 0 8px 0 rgba(0,0,0,.18);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vr-project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 32px rgba(0,0,0,.3), 0 12px 0 rgba(0,0,0,.22);
+}
+
+.vr-project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 3px solid var(--accent);
+}
+
+.vr-project-header h3 {
+  font-family: "Boring Sans B Heavy", "Bebas Neue", Impact, Inter, sans-serif;
+  font-size: 42px;
+  margin: 0;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.vr-project-year {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--text);
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.vr-project-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.vr-project-media {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.vr-video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  border-radius: 14px;
+  box-shadow: 0 8px 16px rgba(0,0,0,.2);
+  background: #000;
+}
+
+.vr-video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.vr-project-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.vr-project-images img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.2);
+  transition: transform 0.3s ease;
+}
+
+.vr-project-images img:hover {
+  transform: scale(1.05);
+}
+
+.vr-project-description {
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.vr-project-description p {
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.vr-project-description ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.vr-project-description ul li {
+  padding: 10px 0 10px 30px;
+  position: relative;
+  font-weight: 500;
+}
+
+.vr-project-description ul li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 900;
+  font-size: 20px;
+}
+
+.vr-project-tech {
+  margin-top: 25px;
+  padding: 15px;
+  background: rgba(10, 10, 10, 0.05);
+  border-radius: 10px;
+  border-left: 4px solid var(--accent);
+  font-size: 15px;
+}
+
+.vr-project-tech strong {
+  color: var(--text);
+  font-weight: 800;
+}
+
+/* Navigation Link Styles */
+.menu a {
+  color: #efefef;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: .3px;
+  opacity: .9;
+  transition: opacity 0.2s ease;
+}
+
+.menu a:hover {
+  opacity: 1;
+}
+
+/* Mobile styles for VR Projects */
+@media (max-width: 768px) {
+  .vr-projects-section {
+    padding: 60px 0 40px;
+  }
+
+  .vr-project-card {
+    padding: 25px;
+    margin-bottom: 30px;
+  }
+
+  .vr-project-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .vr-project-header h3 {
+    font-size: 32px;
+  }
+
+  .vr-project-images {
+    grid-template-columns: 1fr;
+  }
+
+  .vr-project-content {
+    gap: 20px;
+  }
+
+  .menu {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .menu a {
+    font-size: 12px;
+  }
+}
+
 @media (max-width: 768px) {
   .site-footer .footer-inner { flex-direction: column; }
   .social-btn { font-size: 13px; padding: 10px 12px; }

@@ -1,11 +1,12 @@
 import GlitchText from './GlitchText'
-import FloatingImages from './FloatingImages'
-import DotGrid from './DotGrid'
+import Layout from './Layout'
 import ProjectModal from './ProjectModal'
+import VRProjects from './VRProjects'
 import { useState } from 'react'
 import { projects } from './data/projects'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-export default function App() {
+function HomePage() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -23,31 +24,7 @@ export default function App() {
   };
 
   return (
-    <>
-      <DotGrid />
-      <FloatingImages count={9} />
-      <div className="site-header">
-        <div className="container nav-wrap">
-          <div className="nav">
-            <div className="logo">
-              <div className="logo-badge">S</div>
-              Samad Qamar
-            </div>
-            <nav className="menu" aria-label="Primary">
-              <a href="#about">ABOUT ME</a>
-              <span className="slash">/</span>
-              <a href="#projects">PROJECTS</a>
-              <span className="slash">/</span>
-              <a href="#skills">SKILLS</a>
-              <span className="slash">/</span>
-              <a href="#roles">EXPERIENCE</a>
-            </nav>
-            <div className="nav-cta">
-              <a className="btn accent" href="/Resume.pdf" download="Samad_Qamar_Resume.pdf">VIEW RESUME</a>
-            </div>
-          </div>
-        </div>
-      </div>
+    <Layout>
 
       <header className="hero">
         <div className="container">
@@ -260,7 +237,18 @@ export default function App() {
         isOpen={isModalOpen} 
         onClose={handleCloseModal} 
       />
-    </>
+    </Layout>
+  )
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/vr-projects" element={<VRProjects />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
