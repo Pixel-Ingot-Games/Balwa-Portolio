@@ -48,8 +48,6 @@ export default function Layout({ children }: LayoutProps) {
               <a href={isHomePage ? "#skills" : "/#skills"} onClick={(e) => handleHashLink('#skills', e)}>SKILLS</a>
               <span className="slash">/</span>
               <a href={isHomePage ? "#roles" : "/#roles"} onClick={(e) => handleHashLink('#roles', e)}>EXPERIENCE</a>
-              <span className="slash">/</span>
-              <Link to="/vr-projects">VR PROJECTS</Link>
             </nav>
             <div className="nav-cta">
               <a className="btn accent" href="/Resume.pdf" download="Samad_Qamar_Resume.pdf">VIEW RESUME</a>
