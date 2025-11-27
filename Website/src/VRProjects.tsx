@@ -283,6 +283,17 @@ export default function VRProjects() {
                     allowFullScreen
                   ></iframe>
                 </div>
+                <div className="vr-video-container">
+                  <iframe
+                    width="100%"
+                    height="400"
+                    src="https://www.youtube.com/embed/yc3IOPTura4?si=mWDlgKgwrYnvFcko"
+                    title="Multiplayer VR Game"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
                 
               </div>
               <div className="vr-project-description">
